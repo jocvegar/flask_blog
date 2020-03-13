@@ -22,11 +22,45 @@
         {% include 'navigation.html' %}
         {% block body %}{% endblock %}
         {% include 'footer.html' %}
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="fa fa-chevron-up"></span></a>
         <!-- Bootstrap core JavaScript -->
         <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
         <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
         <!-- Custom scripts for this template -->
         <script src="{{ url_for('static', filename='clean-blog.min.js') }}"></script>
+
+        <script>
+            $(document).ready(function(){
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 50) {
+                        $('#back-to-top').fadeIn();
+                    } else {
+                        $('#back-to-top').fadeOut();
+                    }
+                });
+
+                $('#back-to-top').click(function () {
+                    $('#back-to-top').tooltip('hide');
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+
+                $('#back-to-top').tooltip('show');
+            });
+        </script>
+
+        <style>
+            .back-to-top {
+                cursor: pointer;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                display:none;
+                padding: 0.65rem 1rem;
+            }
+        </style>
     </body>
 </html>
